@@ -9,7 +9,7 @@ class Auth():
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """Returns a boolean"""
-        if path is None and excluded_paths is None or not excluded_paths:
+        if path is None or excluded_paths is None or not excluded_paths:
             return True
         if path.endswith("/") is False:
             path = path + "/"
