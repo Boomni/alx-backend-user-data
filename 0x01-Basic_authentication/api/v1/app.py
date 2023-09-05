@@ -15,7 +15,11 @@ app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 auth = getenv("AUTH_TYPE")
-auth = Auth()
+
+
+if auth == "auth":
+    auth = Auth()
+
 
 @app.errorhandler(404)
 def not_found(error) -> str:
@@ -39,6 +43,7 @@ def forbidden(error) -> str:
     forbidden resources
     """
     return jsonify({"error": "Forbidden"}), 403
+
 
 @app.before_request
 def check_auth() -> str:
