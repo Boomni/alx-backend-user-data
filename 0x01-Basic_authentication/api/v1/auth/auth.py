@@ -11,7 +11,7 @@ class Auth():
         """Returns a boolean"""
         if path and excluded_paths:
             return False
-    
+
     def authorization_header(self, request=None) -> str:
         """Returns None - request"""
         return None
