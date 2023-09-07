@@ -11,9 +11,7 @@ class Auth():
         """Returns a boolean"""
         if path is None or excluded_paths is None or not excluded_paths:
             return True
-
-        astericks = [stars[:-1]
-                        for stars in excluded_paths if stars[-1] == '*']
+        astericks = filter(lambda star: star[-1] == '*', excluded_paths)
         for stars in astericks:
             if path.startswith(stars):
                 return False
