@@ -11,6 +11,9 @@ class Auth():
         """Returns a boolean"""
         if path is None or excluded_paths is None or not excluded_paths:
             return True
+        for exclude_path in excluded_paths:
+            if excluded_path.startswith(path + '*'):
+                return False
         if path.endswith("/") is False:
             path = path + "/"
         if path in excluded_paths:
