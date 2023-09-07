@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """API Authentication"""
 from api.v1.auth.auth import Auth
-from models.user import User
+import base64
+import binascii
 
 
 class BasicAuth(Auth):
@@ -25,11 +26,27 @@ class BasicAuth(Auth):
         else:
             return None
 
+    def decode_base64_authorization_header(
+            self,
+            base64_authorization_header: str
+            ) -> str:
+        """Basic - Base64 decode"""
+        if base64_authorization_header is None:
+            return None
+        if not isinstance(base64_authorization_header, str):
+            return None
+        try:
+            decoded_b_header = base64.b64decode(base64_authorization_header)
+            header = decoded_b_header.decode('utf-8')
+            return header
+        except binascii.Error:
+            return None
+
     def extract_user_credentials(
             self,
             decoded_base64_authorization_header: str
             ) -> str:
-        """Basic - Base64 decode"""
+        """Basic - User credentials"""
         if decoded_base64_authorization_header is None:
             return None, None
         if not isinstance(decoded_base64_authorization_header, str):
