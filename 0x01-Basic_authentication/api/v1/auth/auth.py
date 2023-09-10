@@ -2,6 +2,7 @@
 """API Authentication"""
 from flask import request
 from typing import TypeVar, List
+import fnmatch
 
 
 class Auth():
@@ -11,22 +12,9 @@ class Auth():
         """Returns a boolean"""
         if path is None or excluded_paths is None or not excluded_paths:
             return True
-        if path.endswith("/") is False:
-            path = path + "/"
-
         for excluded_path in excluded_paths:
-            if excluded_path.endswith('/') is false:
-                excluded_path += '/'
-
-        astericks = [stars[:-1]
-                     for stars in excluded_paths if stars[-1] == '*']
-
-        for stars in astericks:
-            if path.startswith(stars):
+            if fnmatch.fnmatch(path, excluded_path):
                 return False
-
-        if path in excluded_paths:
-            return False
         return True
 
     def authorization_header(self, request=None) -> str:
