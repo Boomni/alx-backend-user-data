@@ -18,10 +18,10 @@ auth = None
 auth = getenv("AUTH_TYPE")
 
 
-if auth == "auth":
-    auth = Auth()
-elif auth == "basic_auth":
+if auth == "basic_auth":
     auth = BasicAuth()
+else:
+    auth = Auth()
 
 
 @app.errorhandler(404)
