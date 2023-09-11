@@ -60,6 +60,7 @@ def check_auth() -> str:
             if auth_header is None:
                 abort(401)
             user = auth.current_user(request)
+            request.current_user = user
             if user is None:
                 abort(403)
 
