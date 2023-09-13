@@ -9,7 +9,7 @@ from sqlalchemy import Column, Integer, String
 Base = declarative_base()
 
 
-class User(Base) -> None:
+class User(Base):
     """Class for users table"""
     __tablename__ = "users"
 
