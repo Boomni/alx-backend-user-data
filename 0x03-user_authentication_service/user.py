@@ -9,7 +9,8 @@ from sqlalchemy import Column, Integer, String
 Base = declarative_base()
 
 
-class User(Base):
+class User(Base) -> None:
+    """Class for users table"""
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
