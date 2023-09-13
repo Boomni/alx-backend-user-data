@@ -56,7 +56,8 @@ def check_auth() -> str:
         excluded_paths = [
                 '/api/v1/status/',
                 '/api/v1/unauthorized/',
-                '/api/v1/forbidden/'
+                '/api/v1/forbidden/',
+                'api/v1/auth_session/login'
                 ]
         if auth.require_auth(request.path, excluded_paths):
             auth_header = auth.authorization_header(request)
@@ -66,6 +67,9 @@ def check_auth() -> str:
             request.current_user = user
             if user is None:
                 abort(403)
+            auth_cookie = auth.session_cookie(request)
+            if auth_header is None and auth_cookie is None:
+                abort(401)
 
 
 if __name__ == "__main__":
