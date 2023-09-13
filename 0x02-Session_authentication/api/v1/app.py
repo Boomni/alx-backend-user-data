@@ -58,7 +58,7 @@ def check_auth() -> str:
                 '/api/v1/status/',
                 '/api/v1/unauthorized/',
                 '/api/v1/forbidden/',
-                '/api/v1/auth_session/login'
+                '/api/v1/auth_session/login/'
                 ]
         if auth.require_auth(request.path, excluded_paths):
             auth_header = auth.authorization_header(request)
