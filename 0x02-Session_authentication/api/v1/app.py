@@ -53,6 +53,7 @@ def check_auth() -> str:
     """ Checks authentication for each request """
     global auth
     if auth is not None:
+        setattr(request, "current_user", auth.current_user(request))
         excluded_paths = [
                 '/api/v1/status/',
                 '/api/v1/unauthorized/',
@@ -63,7 +64,6 @@ def check_auth() -> str:
             auth_header = auth.authorization_header(request)
             auth_cookie = auth.session_cookie(request)
             auth_user = auth.current_user(request)
-            request.current_user = auth_user
             if auth_header is None and auth_cookie is None:
                 abort(401)
             if auth_user is None:

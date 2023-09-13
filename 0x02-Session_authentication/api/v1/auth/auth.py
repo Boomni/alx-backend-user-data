@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ Auth """
-from flask import request
+from flask import request, abort
 from typing import List, TypeVar
 from fnmatch import fnmatch
 import os
